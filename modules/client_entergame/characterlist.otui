@@ -164,7 +164,7 @@ MainWindow
         self:setSize({width = 350, height = 400})
       end
     else
-      self:setSize({width = 250, height = 248})
+      self:setSize({width = 280, height = 248})
     end
 
   TextList
