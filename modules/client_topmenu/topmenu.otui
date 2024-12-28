@@ -80,6 +80,7 @@ TopMenuPanel
     anchors.left: parent.left
     margin-left: 10
     size: 110 32
+    onClick: openDiscordLink()
 
     UIWidget
       id: discordIcon

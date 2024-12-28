@@ -85,12 +85,15 @@ function init()
 
     topLeftOnlinePlayersLabel = topMenu:recursiveGetChildById('topLeftOnlinePlayersLabel')
 
-    topLeftDiscordStreamersLabel = topMenu:recursiveGetChildById('topLeftDiscordStreamersLabel')
+
     topLeftYoutubeViewersLabel = topMenu:recursiveGetChildById('topLeftYoutubeViewersLabel')
     topLeftYoutubeStreamersLabel = topMenu:recursiveGetChildById('topLeftYoutubeStreamersLabel')
 
     topLeftYoutubeLink = topMenu:recursiveGetChildById('youtubeIcon')
     topLeftDiscordLink = topMenu:recursiveGetChildById('discordIcon')
+    topLeftDiscordLink:setTooltip(tr('Click to join our official Discord server and connect with other players!'))
+    
+    setLinkDiscord("https://discord.gg/FAa3s4PA")
 
     Keybind.new("UI", "Toggle Top Menu", "Ctrl+Shift+T", "")
     Keybind.bind("UI", "Toggle Top Menu", {
