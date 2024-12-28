@@ -6,6 +6,7 @@ Services = {
     --updater = "http://localhost/api/updater.php", --./updater
     --status = "http://localhost/login.php", --./client_entergame | ./client_topmenu
     websites = "https://www.rookgaard.pl/account/register", --./client_entergame "Forgot password and/or email"
+    recover = "https://www.rookgaard.pl/account/recover", --"Forgot password and/or email"
 }
 
 Servers_init = {
