@@ -89,22 +89,20 @@ EnterGameWindow
     $!on:
       visible: false
 
-  Label
-    !text: tr('Forgot password and/or email')
+  QtButton
     id: Forgot_password_email
-    font: verdana-11px-monochrome-underline
+    !text: tr('Forgot password or email')
+    font: verdana-11px-monochrome
     anchors.left: rememberEmailBox.left
-    anchors.right: parent.right
     anchors.top: rememberEmailBox.bottom
-    opacity: 0.8
     margin-top: 5
-    @onClick: g_platform.openUrl(Services.websites)
-    @onSetup: | 
-        if Services and Services.websites then
-            self:setVisible(true)
-        else
-            self:setVisible(false)
-            self:hide()
+    width: 160  
+    height: 20  
+    text-align: center  
+    text-offset: 0 0  
+    @onClick: |
+        if Services.websites then
+            g_platform.openUrl(Services.recover)
         end
 
   MenuLabel
@@ -243,6 +241,7 @@ EnterGameWindow
 
   QtButton
     !text: tr('Login')
+    font: verdana-11px-monochrome
     anchors.right: parent.right
     anchors.top: prev.bottom
     margin-top: 9
@@ -251,10 +250,11 @@ EnterGameWindow
 
   QtButton
     !text: tr('Create New Account')
+    font: verdana-11px-monochrome
     anchors.left: parent.left
     anchors.top: prev.bottom
     margin-top: -17
-    size: 109 20
+    size: 125 20
     @onClick: g_platform.openUrl(Services.websites)
 
     @onSetup: | 
