@@ -3,11 +3,12 @@ ShowOffWidget < UIWidget
 
   Label
     id: image
-    size: 64 64
+    size: 80 80
     anchors.left: parent.left
     anchors.top: parent.top
-    margin-top: 28
-    margin-left: 10
+    margin-top: 15
+    margin-left: 15
+    margin-bottom: 15
     image-auto-resize: true
 
   Label
@@ -19,7 +20,7 @@ ShowOffWidget < UIWidget
     margin-top: 10
     margin-left: 10
     margin-right: 40
-    color: #c0c0c0ff
+    font: verdana-11px-rounded
     text-wrap: true
 
 Panel
@@ -28,19 +29,6 @@ Panel
   anchors.bottom: parent.bottom
   anchors.horizontalCenter: parent.horizontalCenter
   image-source: /images/ui/panel_top
-  
-  UIWidget
-    phantom: true
-    anchors.bottom: parent.bottom
-    anchors.horizontalCenter: parent.horizontalCenter
-    text-align: center
-    text-auto-resize: true
-    color: #e98d02
-    margin-bottom: 110
-    text: OTClient Redemption
-    font: verdana-11px-rounded
-    font-scale: 4
-    shader: Map - Party
 
   MiniQtScrollableWindow
     id: showOffWindow
@@ -52,15 +40,14 @@ Panel
 
     Label
       id: showOffWindowText
-      !text: tr('Random Hit')
-      font: verdana-11px-antialised
+      !text: tr('Random Hint')
+      font: verdana-11px-rounded
       text-offset: 0 2
       text-align: top
       anchors.top: parent.top
       anchors.bottom: parent.bottom
       anchors.left: parent.left
       anchors.right: parent.right
-      opacity: 0.5
 
   MiniQtWindow
     id: eventsWindow
@@ -80,7 +67,6 @@ Panel
       anchors.bottom: parent.bottom
       anchors.left: parent.left
       anchors.right: parent.right
-      opacity: 0.5
 
     UIWidget
       anchors.top: parent.top
@@ -93,7 +79,7 @@ Panel
       margin-bottom: 8
       image-source: /images/ui/widget_border
       padding: 2
-      @onClick: onClickOnCalendar()
+      @onClick: modules.client_bottommenu.toggleCalendar()
 
       CalendarTopMark
         !text: tr('Active')
@@ -102,12 +88,15 @@ Panel
         anchors.left: parent.left
         anchors.right: parent.horizontalCenter
 
-      CalendarDay
+      Panel
         id: activeScheduleEvent
         anchors.top: prev.bottom
         anchors.left: prev.left
         anchors.right: prev.right
         anchors.bottom: parent.bottom
+        image-source: /images/ui/panel_flat
+        image-border: 1
+        border: 1 alpha
 
       CalendarTopMark
         !text: tr('Upcoming')
@@ -116,14 +105,16 @@ Panel
         anchors.left: parent.horizontalCenter
         margin-left: 1  
 
-      CalendarDay
+      Panel
         id: upcomingScheduleEvent
         anchors.top: prev.bottom
         anchors.right: prev.right
         anchors.left: prev.left
         anchors.bottom: parent.bottom
-        @onClick: onClickOnCalendar()
-
+        image-source: /images/ui/panel_flat
+        image-border: 1
+        border: 1 alpha
+        
   MiniQtWindow
     id: boostedWindow
     anchors.bottom: parent.bottom
@@ -134,68 +125,34 @@ Panel
     draggable: false
 
     Label
-      !text: tr('Boosted')
-      font: verdana-11px-antialised
+      !text: tr('Monster Of The Day')
+      font: verdana-11px-rounded
       text-offset: 0 2
       text-align: top
       anchors.top: parent.top
       anchors.bottom: parent.bottom
       anchors.left: parent.left
       anchors.right: parent.right
-      opacity: 0.5
 
     Panel
       anchors.top: parent.top
-      anchors.left: parent.left
-      margin-left: 12
-      margin-top: 30
-      size: 64 64
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 15
+      size: 80 80
 
-      Creature
-        id: creature
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        image-source: ""
-        image-border: 0
-        border-width: 0
-        border-color: alpha
-
-      UIWidget
-        id: creature2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        visible: false
+      UICreature
+        id: boostLook
+        anchors.centerIn: parent
+        size: 64 64
+        margin-bottom: 2
+        outfit-shader: outfit_default
+        image-auto-resize: true
 
     Label
-      !text: tr('Creature')
-      anchors.horizontalCenter: prev.horizontalCenter
-      anchors.top: prev.bottom
-      margin-top: 3
-
-    Panel
-      anchors.top: parent.top
-      anchors.right: parent.right
-      margin-right: 12
-      margin-top: 30
-      size: 64 64
-
-      Creature
-        id: boss
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        image-source: ""
-        image-border: 0
-        border-width: 0
-        border-color: alpha
-        
-      UIWidget
-        id: boss2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        visible: false
-
-    Label
-      !text: tr('Boss')
-      anchors.horizontalCenter: prev.horizontalCenter
-      anchors.top: prev.bottom
-      margin-top: 3
+      id: boostName
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.bottom: parent.bottom
+      margin-bottom: 5
+      font: verdana-11px-rounded
+      color: #fc5203
+      horizontalAlignment: Text.AlignHCenter
