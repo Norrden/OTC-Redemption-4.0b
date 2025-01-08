@@ -25,10 +25,10 @@ local default_info = {
 }
 
 function init()
+    motd()
     parseResponse(data)
     bottomMenu = g_ui.displayUI('bottommenu')  
-    motd()
-    calendarWindow = g_ui.displayUI("calendar")
+    calendarWindow = g_ui.displayUI('calendar')
     calendarWindow:setVisible(false)
     connect(g_game, {
         onGameStart = onGameStart,
@@ -53,6 +53,7 @@ function init()
     if g_game.isOnline() then
         hide()
     end
+    toggleCalendar()
 end
 
 function hide()
@@ -168,8 +169,18 @@ local function convertToTimestamp(date)
     local pattern = "(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)"
     local runyear, runmonth, runday, runhour, runminute, runseconds = date:match(pattern)
 
-    if (tonumber(runyear) < currentDate.year) then
-        runyear = currentDate.year + tonumber(runyear)
+    runyear = tonumber(runyear)
+    runmonth = tonumber(runmonth)
+    runday = tonumber(runday)
+    runhour = tonumber(runhour)
+    runminute = tonumber(runminute)
+    runseconds = tonumber(runseconds)
+
+    -- Obsługa roku 0 i 1
+    if runyear == 0 then
+        runyear = currentDate.year
+    elseif runyear == 1 then
+        runyear = currentDate.year + 1
     end
 
     return os.time({
@@ -200,15 +211,6 @@ function parseResponse(data)
                     color = values.color
                 }
             )
-        end
-    end
-    
-    --activeScheduleEvent:clearEvents()
-    local currentDay = os.date('*t', v)
-    checkCalendarDayIfExist(currentDay.year, currentDay.month, currentDay.day)
-    if #currentDay > 0 then
-        for _, values in ipairs(currentDay[1]) do
-            activeScheduleEvent:addScheduleEvent(event, true)
         end
     end
 end
